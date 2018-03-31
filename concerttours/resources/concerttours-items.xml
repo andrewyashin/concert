@@ -8,9 +8,7 @@
 			<value code="indoor"/>
 		</enumtype>
 		
-		<enumtype code="MusicType">
-			<value code="rock"/>
-			<value code="pop"/>
+		<enumtype code="MusicType" dynamic="true">
 		</enumtype>
 	</enumtypes>
 
