@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="ConcertType">
+			<value code="openair"/>
+			<value code="indoor"/>
+		</enumtype>
+		
+		<enumtype code="MusicType">
+			<value code="rock"/>
+			<value code="pop"/>
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation code="Product2RockBand" autocreate="true" generate="false" localized="false">
+			<sourceElement qualifier="tours" type="Product" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="band" type="Band" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="Band2MusicType" autocreate="true" generate="false" localized="false">
+			<deployment table="Band2MusicType" typecode="30269" />
+			<sourceElement qualifier="bands" type="Band" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="types" type="MusicType" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="Product" autocreate="false">
+			<attributes>
+				<attribute qualifier="hashTag" type="java.lang.String">
+					<description>hashtag for concert</description>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Band">
+			<deployment table="Bands" typecode="30000"/>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>unique code of band</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>name of band</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="history" type="java.lang.String">
+					<description>history of band</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="albumSales" type="java.lang.String">
+					<description>official global sales</description>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Concert" extends="VariantProduct">
+			<attributes>
+				<attribute qualifier="venue" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				
+				<attribute qualifier="date" type="java.util.Date">
+					<persistence type="property"/>
+				</attribute>
+				
+				<attribute qualifier="concertType" type="ConcertType">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>
